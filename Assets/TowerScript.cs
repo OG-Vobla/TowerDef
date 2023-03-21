@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class TowerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] Transform CreateTool;
+	bool isTower, isOpen;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Start()
+	{
+		isTower = false;
+		isOpen = false;
+	}
+
+
+	public void OpetCreateTool()
+	{
+		if (!isTower)
+		{
+			isOpen = !isOpen;
+			CreateTool.gameObject.SetActive(isOpen);
+		}
+	}
 }
