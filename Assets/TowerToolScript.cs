@@ -10,7 +10,8 @@ public class TowerToolScript : MonoBehaviour
 	[SerializeField] Transform CreateTool;
 	[SerializeField] List<GameObject> Towers;
 	[SerializeField] List<GameObject> Bullets;
-	public static GameObject target = null;
+	GameObject target = null;
+	GameObject Bullet= null;
 	bool isTower, isOpen;
 	int towerNum;
 
@@ -22,9 +23,9 @@ public class TowerToolScript : MonoBehaviour
 
 	private void Update()
 	{
-		if (isTower)
+		if (Bullet != null && target != null)
 		{
-
+			Bullet.transform.position = Vector3.MoveTowards(Bullet.transform.position, target.transform.position, Time.deltaTime * 10);
 		}
 	}
 
@@ -59,9 +60,8 @@ public class TowerToolScript : MonoBehaviour
 /*				float distance = Mathf.Sqrt((Mathf.Pow((transform.position.x - target.transform.position.x), 2) + Mathf.Pow((transform.position.y - target.transform.position.y), 2)));
 				Bullets[towerNum].transform.localScale = new Vector2(1, distance );*/
 
-				Bullets[towerNum].SetActive(true);
+				Bullet = Instantiate(Bullets[towerNum], transform);
 				yield return new WaitForSeconds(0.5f);
-				Bullets[towerNum].SetActive(false);
 			}
 			yield return new WaitForSeconds(2);
 		}
